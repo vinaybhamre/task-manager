@@ -1,4 +1,5 @@
-import { NextFunction, Request, Response } from 'express'
+import type { NextFunction, Request, Response } from 'express'
+import { AppError } from '../../middleware/error-handler'
 import { sendSuccess } from '../../utils/api-response'
 import { authService } from './auth.service'
 
@@ -45,9 +46,9 @@ export const authController = {
   async refresh(req: Request, res: Response, next: NextFunction) {
     try {
       const token = req.cookies.refreshToken
-      if (!token) {
-        return res.status(401).json({ success: false, message: 'No refresh token' })
-      }
+
+      if (!token) return next(new AppError('No refresh token', 401))
+
       const { accessToken } = await authService.refresh(token)
 
       sendSuccess(res, { accessToken })

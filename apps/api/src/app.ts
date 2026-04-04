@@ -4,7 +4,8 @@ import express from 'express'
 import helmet from 'helmet'
 import { env } from './config/env'
 import { errorHandler } from './middleware/error-handler'
-import authRouter from './modules/auth/auth.routes'
+import { authRouter } from './modules/auth/auth.routes'
+import { taskRouter } from './modules/task/task.routes'
 
 const app = express()
 
@@ -18,11 +19,12 @@ app.use(
 app.use(express.json())
 app.use(cookieParser())
 
-app.get('/health', (req, res) => {
+app.get('/health', (_, res) => {
   res.send({ status: 'Ok' })
 })
 
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/tasks', taskRouter)
 
 app.use(errorHandler)
 

@@ -9,5 +9,3 @@ authRouter.post('/register', validate(registerSchema), authController.register)
 authRouter.post('/login', validate(loginSchema), authController.login)
 authRouter.post('/logout', authController.logout)
 authRouter.post('/refresh', authController.refresh)
-
-export default authRouter

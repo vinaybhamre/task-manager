@@ -7,6 +7,7 @@ export type AuthRequest = Request & {
     userId: string
     email: string
   }
+  params: Record<string, string>
 }
 
 export const authenticate = (req: AuthRequest, _res: Response, next: NextFunction) => {
