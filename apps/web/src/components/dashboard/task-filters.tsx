@@ -3,11 +3,11 @@
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useCallback } from 'react'
+import { Suspense, useCallback } from 'react'
 
 const STATUSES = ['ALL', 'TODO', 'IN_PROGRESS', 'DONE']
 
-export default function TaskFilters() {
+function TaskFiltersContent() {
   const router = useRouter()
   const searchParams = useSearchParams()
 
@@ -49,5 +49,13 @@ export default function TaskFilters() {
         ))}
       </div>
     </div>
+  )
+}
+
+export default function TaskFilters() {
+  return (
+    <Suspense fallback={null}>
+      <TaskFiltersContent />
+    </Suspense>
   )
 }

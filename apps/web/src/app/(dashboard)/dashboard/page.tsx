@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button'
 import { useTasks } from '@/hooks/use-tasks'
 import { PlusIcon } from 'lucide-react'
 import { useRouter, useSearchParams } from 'next/navigation'
-import { useState } from 'react'
+import { Suspense, useState } from 'react'
 
 type Task = {
   id: string
@@ -19,7 +19,7 @@ type Task = {
   updatedAt: string
 }
 
-export default function DashboardPage() {
+function DashboardContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [modalOpen, setModalOpen] = useState(false)
@@ -96,5 +96,13 @@ export default function DashboardPage() {
 
       <TaskModal open={modalOpen} onClose={handleCloseModal} task={editingTask} />
     </div>
+  )
+}
+
+export default function DashboardPage() {
+  return (
+    <Suspense fallback={<div className="text-center py-12 text-muted-foreground">Loading...</div>}>
+      <DashboardContent />
+    </Suspense>
   )
 }
