@@ -22,5 +22,5 @@ export const login = async (body: { email: string; password: string }) => {
 }
 
 export const logout = async () => {
-  await api.post('/auth/logout', null)
+  await api.post('/auth/logout', {})
 }

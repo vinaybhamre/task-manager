@@ -45,7 +45,7 @@ export const getAllTasks = async (params?: {
   limit?: number
 }) => {
   const response = await api.get<TasksResponse>('/tasks', { params })
-  return response.data.tasks
+  return response.data
 }
 
 export const getTaskById = async (taskId: string) => {

@@ -51,6 +51,7 @@ async function fetchClient<T>(endpoint: string, options: FetchOptions = {}): Pro
 
   try {
     const response = await fetch(fetchUrl, {
+      ...init,
       method: init.method,
       credentials: 'include',
       headers: {
